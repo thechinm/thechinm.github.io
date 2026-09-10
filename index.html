@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安子轩 - 个人资料与作品介绍站</title>
+    <meta name="description" content="安子轩人物介绍、个人资料、代表作品、演艺经历与相关资讯。关注安子轩最新动态、作品列表与粉丝互动平台。">
+    <meta name="keywords" content="安子轩,安子轩个人资料,安子轩作品,安子轩演艺经历,安子轩最新动态">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f9f7f4;
+            color: #2d2d2d;
+            line-height: 1.7;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .site-header {
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a15c3e;
+            letter-spacing: 1px;
+        }
+        .main-nav ul {
+            display: flex;
+            gap: 28px;
+        }
+        .main-nav a {
+            font-size: 0.95rem;
+            color: #444;
+            padding: 6px 2px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: #a15c3e;
+            border-bottom-color: #a15c3e;
+        }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #f5ebe3 0%, #e9d5c7 100%);
+            padding: 60px 0;
+            margin-bottom: 20px;
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .hero-photo {
+            width: 180px;
+            height: 180px;
+            background: #d9b8a8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: #fff;
+            font-weight: 300;
+            box-shadow: 0 8px 24px rgba(161,92,62,0.2);
+            flex-shrink: 0;
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 260px;
+        }
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #3a2e28;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .hero-sub {
+            font-size: 1.05rem;
+            color: #6b4f3f;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+        .hero-desc {
+            font-size: 0.98rem;
+            color: #5a4a40;
+            max-width: 600px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 22px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a15c3e;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #7a6a5f;
+        }
+
+        /* Section common */
+        .section {
+            padding: 36px 0;
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            position: relative;
+            padding-left: 16px;
+            color: #2d2d2d;
+        }
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 5px;
+            height: 24px;
+            background: #a15c3e;
+            border-radius: 3px;
+        }
+
+        /* Profile intro */
+        .profile-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .profile-info-list {
+            flex: 1;
+            min-width: 240px;
+        }
+        .profile-info-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 0.95rem;
+        }
+        .profile-info-list li span {
+            color: #8a7a6f;
+            margin-right: 12px;
+            font-weight: 500;
+        }
+        .profile-desc {
+            flex: 2;
+            min-width: 280px;
+            font-size: 0.97rem;
+            color: #4a4a4a;
+        }
+        .profile-desc p {
+            margin-bottom: 16px;
+        }
+
+        /* Works grid */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .work-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .work-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .work-year {
+            font-size: 0.8rem;
+            color: #a15c3e;
+            background: #f8ece6;
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .work-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .work-role {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .work-desc {
+            font-size: 0.88rem;
+            color: #5a5a5a;
+            margin-top: 8px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+            margin-left: 8px;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 2px;
+            height: 100%;
+            background: #e0cfc5;
+        }
+        .timeline-item {
+            position: relative;
+            padding: 0 0 28px 20px;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: #a15c3e;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #a15c3e;
+        }
+        .timeline-year {
+            font-weight: 700;
+            color: #a15c3e;
+            font-size: 1.05rem;
+        }
+        .timeline-text {
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+        .gallery-item {
+            background: #e7ddd5;
+            border-radius: 12px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a15c3e;
+            font-size: 2.2rem;
+            font-weight: 300;
+            transition: transform 0.2s;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+        }
+        .faq-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .faq-question {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            color: #3a2e28;
+        }
+        .faq-answer {
+            font-size: 0.92rem;
+            color: #555;
+        }
+
+        /* CTA / Follow */
+        .follow-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .follow-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .follow-box p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            display: inline-block;
+            padding: 8px 22px;
+            border-radius: 30px;
+            background: #f3e9e3;
+            color: #a15c3e;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid #e0cfc5;
+            transition: background 0.2s, color 0.2s;
+        }
+        .social-btn:hover {
+            background: #a15c3e;
+            color: #fff;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #2e2a27;
+            color: #b0a89f;
+            padding: 32px 0 20px;
+            margin-top: 40px;
+            font-size: 0.85rem;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-col p {
+            margin-bottom: 6px;
+        }
+        .footer-bottom {
+            border-top: 1px solid #443d38;
+            margin-top: 20px;
+            padding-top: 16px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+                width: 100%;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                background: #fff;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            .main-nav.open {
+                display: block;
+            }
+            .main-nav ul {
+                flex-direction: column;
+                padding: 16px 20px;
+                gap: 12px;
+            }
+            .nav-toggle {
+                display: block;
+            }
+            .hero {
+                padding: 40px 0;
+            }
+            .hero-content {
+                justify-content: center;
+                text-align: center;
+            }
+            .hero-photo {
+                width: 140px;
+                height: 140px;
+                font-size: 3.5rem;
+            }
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .section {
+                padding: 28px 0;
+            }
+            .profile-card {
+                padding: 20px;
+            }
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">安子轩</div>
+        <button class="nav-toggle" id="navToggle">☰</button>
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="#intro" class="active">首页</a></li>
+                <li><a href="#profile">个人简介</a></li>
+                <li><a href="#works">代表作品</a></li>
+                <li><a href="#experience">演艺经历</a></li>
+                <li><a href="#gallery">影像集</a></li>
+                <li><a href="#faq">常见问题</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container hero-content">
+        <div class="hero-photo">安</div>
+        <div class="hero-text">
+            <h1>安子轩</h1>
+            <p class="hero-sub">演员 · 歌手 · 青年创作者</p>
+            <p class="hero-desc">安子轩，一位活跃在影视与音乐领域的青年艺人。凭借对表演的专注与对作品的用心，逐步获得观众认可。这里集合了安子轩的个人资料、作品动态与台前幕后的故事。</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-num">15+</div>
+                    <div class="stat-label">参演作品</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">8</div>
+                    <div class="stat-label">音乐单曲</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">20+</div>
+                    <div class="stat-label">活动出席</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main>
+    <!-- 个人简介 -->
+    <section class="section" id="profile">
+        <div class="container">
+            <h2 class="section-title">个人简介</h2>
+            <div class="profile-card">
+                <div class="profile-info-list">
+                    <ul>
+                        <li><span>姓名</span>安子轩</li>
+                        <li><span>国籍</span>中国</li>
+                        <li><span>职业</span>演员、歌手</li>
+                        <li><span>语言</span>普通话、英语</li>
+                        <li><span>特长</span>表演、声乐、吉他</li>
+                        <li><span>兴趣</span>电影、阅读、旅行</li>
+                    </ul>
+                </div>
+                <div class="profile-desc">
+                    <p>安子轩出生于普通家庭，从小对艺术表现出浓厚兴趣。学生时代积极参与校园文艺活动，并在一次市级比赛中被发掘，由此开启专业艺术学习道路。经过系统训练后，安子轩进入影视行业，从配角做起，一步步积累经验。</p>
+                    <p>在表演上，安子轩注重人物内心刻画，努力让每个角色都具有真实感。同时，他也尝试音乐创作，用歌声传递情感。无论是镜头前还是录音棚里，安子轩始终保持着对艺术的敬畏与热爱。</p>
+                    <p>生活中的安子轩低调内敛，喜欢通过阅读和旅行来丰富自己的认知。他认为，演员的生活体验是表演的土壤，只有真诚地生活，才能真诚地创作。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 代表作品 -->
+    <section class="section" id="works">
+        <div class="container">
+            <h2 class="section-title">代表作品</h2>
+            <div class="works-grid">
+                <article class="work-card">
+                    <span class="work-year">2024</span>
+                    <h3 class="work-title">《微光之城》</h3>
+                    <div class="work-role">饰演：林启航</div>
+                    <p class="work-desc">都市情感剧，讲述年轻人在大城市追逐梦想与寻找自我的故事。安子轩饰演的创业青年林启航，展现了坚韧与温柔并存的复杂性格。</p>
+                </article>
+                <article class="work-card">
+                    <span class="work-year">2023</span>
+                    <h3 class="work-title">《南风知我意》</h3>
+                    <div class="work-role">饰演：宋以南</div>
+                    <p class="work-desc">古装言情剧，安子轩首次挑战古装角色，饰演温润如玉却身负秘密的世家公子，其细腻表演获得不少观众好评。</p>
+                </article>
+                <article class="work-card">
+                    <span class="work-year">2022</span>
+                    <h3 class="work-title">《追光者》</h3>
+                    <div class="work-role">饰演：陈一鸣</div>
+                    <p class="work-desc">青春励志电影，聚焦体育生的成长历程。安子轩为角色进行了三个月的体能训练，以真实的状态诠释了运动员的坚持与梦想。</p>
+                </article>
+                <article class="work-card">
+                    <span class="work-year">2021</span>
+                    <h3 class="work-title">《时光的答案》</h3>
+                    <div class="work-role">饰演：少年陆远</div>
+                    <p class="work-desc">温情家庭剧，通过回忆与现实的交错，展现亲情与成长。安子轩在剧中表现自然真挚，让观众记住了这个眼神清澈的少年。</p>
+                </article>
+                <article class="work-card">
+                    <span class="work-year">2020</span>
+                    <h3 class="work-title">《青春纪念册》</h3>
+                    <div class="work-role">饰演：江辰</div>
+                    <p class="work-desc">校园网络剧，安子轩凭借阳光帅气的形象和自然的演技，在网络上收获了一批早期粉丝，成为他演艺生涯的重要起点。</p>
+                </article>
+                <article class="work-card">
+                    <span class="work-year">2024</span>
+                    <h3 class="work-title">单曲《远航》</h3>
+                    <div class="work-role">词曲：安子轩</div>
+                    <p class="work-desc">首支个人创作单曲，以轻柔的民谣风格讲述对未来的憧憬与勇气，展现了他在音乐方面的才华。</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 演艺经历 -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title">演艺经历</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2024年</div>
+                    <p class="timeline-text">参演都市剧《微光之城》播出，人气稳步提升；年底发布个人首支原创单曲《远航》，获得广泛关注。</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2023年</div>
+                    <p class="timeline-text">主演古装剧《南风知我意》，首次挑战古装角色，展现出更多可塑性；同年受邀参加多个影视展览活动。</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2022年</div>
+                    <p class="timeline-text">电影《追光者》上映，为角色进行高强度体能训练，表演获得业内人士肯定；参与公益短片拍摄。</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2021年</div>
+                    <p class="timeline-text">在《时光的答案》中饰演少年时期的重要角色，与多位资深演员合作，积累了宝贵经验。</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020年</div>
+                    <p class="timeline-text">出演校园网络剧《青春纪念册》，正式进入影视圈；该剧播出后反响良好，安子轩开始被更多观众认识。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 影像集 -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">影像集</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">剧照</div>
+                <div class="gallery-item">写真</div>
+                <div class="gallery-item">活动</div>
+                <div class="gallery-item">生活</div>
+                <div class="gallery-item">幕后</div>
+                <div class="gallery-item">封面</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section class="section" id="faq">
+        <div class="container">
+            <h2 class="section-title">常见问题</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">安子轩是如何进入演艺圈的？</div>
+                    <p class="faq-answer">安子轩在学生时代参加市级文艺比赛时被经纪公司发掘，随后接受了系统的表演培训，并通过出演网络剧正式出道。他的成长路径相对平稳，每一步都基于对表演的认真态度。</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">安子轩有哪些代表角色？</div>
+                    <p class="faq-answer">比较有代表性的角色包括《微光之城》中的林启航、《南风知我意》中的宋以南，以及《追光者》中的陈一鸣。这些角色类型各不相同，展现了他在不同类型剧集中的适应能力。</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">安子轩除了演戏还做什么？</div>
+                    <p class="faq-answer">安子轩也尝试音乐创作，发布过个人单曲。此外，他喜欢阅读和旅行，认为这些爱好有助于丰富自己的情感体验，对表演也有帮助。</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">如何关注安子轩的最新动态？</div>
+                    <p class="faq-answer">可以通过官方认证的社交媒体平台关注安子轩的动态，包括作品发布、活动行程和日常分享。具体请以官方渠道发布的信息为准。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关注互动 -->
+    <section class="section">
+        <div class="container">
+            <div class="follow-box">
+                <h3>了解更多安子轩</h3>
+                <p>关注官方动态，第一时间获取作品与活动信息</p>
+                <div class="social-links">
+                    <a href="#" class="social-btn">微博</a>
+                    <a href="#" class="social-btn">抖音</a>
+                    <a href="#" class="social-btn">小红书</a>
+                    <a href="#" class="social-btn">粉丝论坛</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4 style="color:#fff; margin-bottom:12px;">关于本站</h4>
+                <p>本页面为安子轩爱好者交流平台，非官方站点。</p>
+                <p>内容整理自公开资料，仅供参考。</p>
+            </div>
+            <div class="footer-col">
+                <h4 style="color:#fff; margin-bottom:12px;">快速链接</h4>
+                <p><a href="#profile" style="color:#b0a89f;">个人简介</a></p>
+                <p><a href="#works" style="color:#b0a89f;">代表作品</a></p>
+                <p><a href="#experience" style="color:#b0a89f;">演艺经历</a></p>
+            </div>
+            <div class="footer-col">
+                <h4 style="color:#fff; margin-bottom:12px;">联系</h4>
+                <p>商务合作请通过经纪公司联系</p>
+                <p>粉丝来信：请投递至官方粉丝邮箱</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 安子轩爱好者之家 · 本页面仅用于信息分享与交流</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 移动端导航切换
+    document.getElementById('navToggle').addEventListener('click', function() {
+        var nav = document.getElementById('mainNav');
+        nav.classList.toggle('open');
+    });
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            var targetId = this.getAttribute('href');
+            if (targetId.length > 1) {
+                var target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // 关闭移动端菜单
+                    document.getElementById('mainNav').classList.remove('open');
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
